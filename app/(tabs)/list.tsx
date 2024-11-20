@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, FlatList, View } from 'react-native';
+import React, { useState } from 'react';
+import { Button, FlatList, Pressable, View } from 'react-native';
 import { useInfiniteQuery } from 'react-query';
 import { ThemedText } from '@/components/ThemedText';
 import { IPokemon } from '@/types/Pokemon';
@@ -9,7 +9,12 @@ import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 
-const PokemonItem = ({ name, url }: IPokemon) => {
+interface IPokemonItemProps {
+    pokemon: IPokemon,
+    onShowDetails: (url: string) => void
+}
+
+const PokemonItem = ({ pokemon: { name, url }, onShowDetails }: IPokemonItemProps) => {
     return (
         <View style={{
             marginBottom: 8,
@@ -26,12 +31,17 @@ const PokemonItem = ({ name, url }: IPokemon) => {
                 {name.replace(name[0],
                     name[0].toUpperCase())}
             </ThemedText>
-            <IconSymbol style={{ cursor: 'pointer' }} size={28} name="eye.fill" color={Colors.pokemonColors.ivory} />
+            <Pressable onPress={() => onShowDetails(url)}>
+                <IconSymbol style={{ cursor: 'pointer' }} size={28} name="eye.fill" color={Colors.pokemonColors.ivory} />
+            </Pressable>
         </View>
     )
 }
 
 export default function ProfileScreen() {
+
+    const [activePokemonUrl, setActivePokemonUrl] = useState<string | null>(null);
+
     const fetchPokemon = async (offset: number = 0): Promise<IPaginatedResponse<IPokemon>> => {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`);
         return await response.json();
@@ -68,7 +78,7 @@ export default function ProfileScreen() {
                     <FlatList
                         scrollEnabled
                         data={data?.pages.flatMap(page => page.results)}
-                        renderItem={({ item }) => <PokemonItem {...item} />}
+                        renderItem={({ item }) => <PokemonItem pokemon={item} onShowDetails={setActivePokemonUrl} />}
                         keyExtractor={({ name }) => name}
                         onEndReached={() => {
                             if (hasNextPage) {
