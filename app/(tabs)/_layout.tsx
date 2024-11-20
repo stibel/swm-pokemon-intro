@@ -26,7 +26,7 @@ export default function TabLayout() {
           default: {},
         }),
       }}>
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
@@ -38,6 +38,30 @@ export default function TabLayout() {
         options={{
           title: 'Explore',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+        }}
+      /> */}
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: 'Favourite',
+        }}
+      />
+      <Tabs.Screen
+        name="list"
+        options={{
+          title: 'List',
+        }}
+      />
+      <Tabs.Screen
+        name="camera"
+        options={{
+          title: 'Camera',
+        }}
+      />
+      <Tabs.Screen
+        name="map"
+        options={{
+          title: 'Map',
         }}
       />
     </Tabs>
