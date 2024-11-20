@@ -7,23 +7,26 @@ import { IPaginatedResponse } from '@/types/PaginatedReponse';
 
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
+import { IconSymbol } from '@/components/ui/IconSymbol';
 
 const PokemonItem = ({ name, url }: IPokemon) => {
     return (
         <View style={{
+            marginBottom: 8,
+            paddingHorizontal: 8,
+            height: 40,
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-between',
-            backgroundColor: Colors.misc.pokemonRed,
+            alignItems: 'center',
             borderRadius: 5,
-            marginBottom: 8,
-            paddingHorizontal: 8
+            backgroundColor: Colors.pokemonColors.red,
         }}>
-            <ThemedText>
+            <ThemedText style={{ color: Colors.pokemonColors.ivory, fontWeight: 'bold' }}>
                 {name.replace(name[0],
                     name[0].toUpperCase())}
             </ThemedText>
-            <ThemedText>czeker out</ThemedText>
+            <IconSymbol style={{ cursor: 'pointer' }} size={28} name="eye.fill" color={Colors.pokemonColors.ivory} />
         </View>
     )
 }

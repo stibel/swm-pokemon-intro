@@ -23,7 +23,11 @@ export const Colors = {
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
   },
-  misc: {
-    pokemonRed: '#ef5350'
+  pokemonColors: {
+    red: '#EF5350',
+    yellow: '#F6E652',
+    orange: '#F6BD20',
+    blue: '#3B4CCA',
+    ivory: '#FBFBFB'
   }
 };

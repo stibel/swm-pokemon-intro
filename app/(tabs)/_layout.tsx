@@ -44,24 +44,28 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Favourite',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="heart.fill" color={color} />
         }}
       />
       <Tabs.Screen
         name="list"
         options={{
           title: 'List',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="list.clipboard.fill" color={color} />
         }}
       />
       <Tabs.Screen
         name="camera"
         options={{
           title: 'Camera',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="camera.fill" color={color} />
         }}
       />
       <Tabs.Screen
         name="map"
         options={{
           title: 'Map',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="map.fill" color={color} />
         }}
       />
     </Tabs>
