@@ -1,40 +1,53 @@
-import { Image, StyleSheet } from 'react-native';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
+import React, { useEffect } from 'react';
+import { Animated, FlatList, Text } from 'react-native';
+import { useInfiniteQuery } from 'react-query';
 import { ThemedText } from '@/components/ThemedText';
+import { IPokemon } from '@/types/Pokemon';
+import { IPaginatedResponse } from '@/types/PaginatedReponse';
+
+import { ThemedView } from '@/components/ThemedView';
+import { View } from 'react-native-reanimated/lib/typescript/Animated';
 
 
 export default function ProfileScreen() {
+    const fetchPokemon = async (offset: number = 0): Promise<IPaginatedResponse<IPokemon>> => {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`);
+        return await response.json();
+    };
+
+    const {
+        data,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+        status,
+        error
+    } = useInfiniteQuery<IPaginatedResponse<IPokemon>>('pokemons', ({ pageParam = 0 }) => fetchPokemon(pageParam), {
+        getNextPageParam: (lastPage) => {
+            const nextOffset = lastPage.next ? new URLSearchParams(lastPage.next.split('?')[1]).get('offset') : undefined;
+            return nextOffset ? parseInt(nextOffset, 10) : undefined;
+        }
+    });
+
+    useEffect(() => {
+        console.log(data);
+    }, [data]);
+
     return (
-        <ParallaxScrollView
-            headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-            headerImage={
-                <Image
-                    source={require('@/assets/images/partial-react-logo.png')}
-                    style={styles.reactLogo}
+        <ThemedView style={{ flex: 1 }}>
+            <Animated.View style={{
+                flex: 1,
+                paddingVertical: 64,
+                paddingHorizontal: 32,
+                gap: 16,
+                overflow: 'hidden',
+            }}>
+                <FlatList
+                    data={data?.pages.flatMap(page => page.results)}
+                    renderItem={({ item }) => <Text>{item.name}</Text>}
+                    keyExtractor={({ name }) => name}
                 />
-            }>
-            <ThemedText>
-                list
-            </ThemedText>
-        </ParallaxScrollView>
+            </Animated.View>
+        </ThemedView>
     );
 }
-
-const styles = StyleSheet.create({
-    titleContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 8,
-    },
-    stepContainer: {
-        gap: 8,
-        marginBottom: 8,
-    },
-    reactLogo: {
-        height: 178,
-        width: 290,
-        bottom: 0,
-        left: 0,
-        position: 'absolute',
-    },
-});
