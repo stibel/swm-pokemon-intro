@@ -72,6 +72,8 @@ export default function ProfileScreen() {
                                 fetchNextPage();
                             }
                         }}
+                        refreshing={Boolean(status) && status === 'loading'}
+                        onRefresh={refetch}
                         ListFooterComponent={isFetchingNextPage ? <ThemedText>Fetching more...</ThemedText> : null}
                     />
                 }
