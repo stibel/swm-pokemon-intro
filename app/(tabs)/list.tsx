@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, FlatList, Pressable, View } from 'react-native';
+import { Button, FlatList, Modal, Pressable, View } from 'react-native';
 import { useInfiniteQuery } from 'react-query';
 import { ThemedText } from '@/components/ThemedText';
 import { IPokemon } from '@/types/Pokemon';
@@ -8,6 +8,7 @@ import { IPaginatedResponse } from '@/types/PaginatedReponse';
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { PokemonDetails } from '@/components/PokemonDetails';
 
 interface IPokemonItemProps {
     pokemon: IPokemon,
@@ -32,7 +33,7 @@ const PokemonItem = ({ pokemon: { name, url }, onShowDetails }: IPokemonItemProp
                     name[0].toUpperCase())}
             </ThemedText>
             <Pressable onPress={() => onShowDetails(url)}>
-                <IconSymbol style={{ cursor: 'pointer' }} size={28} name="eye.fill" color={Colors.pokemonColors.ivory} />
+                <IconSymbol size={28} name="eye.fill" color={Colors.pokemonColors.ivory} />
             </Pressable>
         </View>
     )
@@ -91,6 +92,25 @@ export default function ProfileScreen() {
                     />
                 }
             </View>
+
+            <Modal
+                visible={Boolean(activePokemonUrl)}
+                onRequestClose={() => setActivePokemonUrl(null)}
+            >
+                <View
+                    style={{
+                        flex: 1,
+                        paddingVertical: 64,
+                        paddingHorizontal: 32,
+                        gap: 16,
+                    }}
+                >
+                    <Pressable style={{ alignSelf: 'flex-end' }} onPress={() => setActivePokemonUrl(null)}>
+                        <IconSymbol size={50} name="xmark.diamond.fill" color={Colors.pokemonColors.red} />
+                    </Pressable>
+                    {activePokemonUrl && <PokemonDetails url={activePokemonUrl} />}
+                </View>
+            </Modal>
         </ThemedView>
     );
 }
