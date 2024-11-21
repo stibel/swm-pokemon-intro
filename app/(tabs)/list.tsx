@@ -14,6 +14,7 @@ import { capitalize } from '@/utils/capitalize';
 import { getSpritePath } from '@/utils/get_sprite_path';
 import { getPokemonIdFromUrl } from '@/utils/get_pokemon_id_from_url';
 import FastImage from 'react-native-fast-image';
+import { screenView } from '@/components/styles/screen_view';
 
 interface IPokemonItemProps {
   pokemon: IPokemonListItem;
@@ -87,13 +88,7 @@ export default function List() {
   return (
     <ThemedView style={{ flex: 1 }}>
       <View
-        style={{
-          flex: 1,
-          paddingVertical: 64,
-          paddingHorizontal: 32,
-          gap: 16,
-          overflow: 'hidden',
-        }}
+        style={screenView}
       >
         {error ? (
           <div>

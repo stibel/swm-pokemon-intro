@@ -9,6 +9,7 @@ import {
 } from '@/utils/async_storage';
 import { PokemonDetails } from '@/components/PokemonDetails';
 import { Link } from 'expo-router';
+import { screenView } from '@/components/styles/screen_view';
 
 export default function HomeScreen() {
   const { data } = useQuery('favourite_pokemon', async () => {
@@ -24,13 +25,7 @@ export default function HomeScreen() {
   return (
     <ThemedView style={{ flex: 1 }}>
       <View
-        style={{
-          flex: 1,
-          paddingVertical: 64,
-          paddingHorizontal: 32,
-          gap: 16,
-          overflow: 'hidden',
-        }}
+        style={screenView}
       >
         {data?.url ? (
           <>
@@ -38,7 +33,7 @@ export default function HomeScreen() {
               title="Remove favourite"
               onPress={() => {
                 removeValueFromAsyncStorage('favourite_pokemon');
-                queryClient.invalidateQueries();
+                queryClient.invalidateQueries('favourite_pokemon');
               }}
             />
             <PokemonDetails url={data.url ?? ''} />
