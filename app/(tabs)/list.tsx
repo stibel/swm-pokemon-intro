@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, FlatList, Modal, Pressable, View } from 'react-native';
+import { ActivityIndicator, Button, FlatList, Modal, Pressable, View } from 'react-native';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
 import { ThemedText } from '@/components/ThemedText';
 import { IPokemonListItem } from '@/types/PokemonListItem';
@@ -11,6 +11,9 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import { PokemonDetails } from '@/components/PokemonDetails';
 import { storeValueInAsyncStorage } from '@/utils/async_storage';
 import { capitalize } from '@/utils/capitalize';
+import { getSpritePath } from '@/utils/get_sprite_path';
+import { getPokemonIdFromUrl } from '@/utils/get_pokemon_id_from_url';
+import FastImage from 'react-native-fast-image';
 
 interface IPokemonItemProps {
   pokemon: IPokemonListItem;
@@ -22,11 +25,12 @@ const PokemonItem = ({
   onShowDetails,
 }: IPokemonItemProps) => {
   return (
-    <View
+    <Pressable
+      onPress={() => onShowDetails(url)}
       style={{
         marginBottom: 8,
-        paddingHorizontal: 8,
-        height: 40,
+        paddingHorizontal: 16,
+        height: 80,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -36,18 +40,12 @@ const PokemonItem = ({
       }}
     >
       <ThemedText
-        style={{ color: Colors.pokemonColors.ivory, fontWeight: 'bold' }}
+        style={{ color: Colors.pokemonColors.ivory, fontWeight: 'bold', textAlign: 'left', fontSize: 24 }}
       >
         {capitalize(name)}
       </ThemedText>
-      <Pressable onPress={() => onShowDetails(url)}>
-        <IconSymbol
-          size={28}
-          name="eye.fill"
-          color={Colors.pokemonColors.ivory}
-        />
-      </Pressable>
-    </View>
+      <FastImage style={{ height: 80, width: 80 }} source={{ uri: getSpritePath(getPokemonIdFromUrl(url)), priority: 'low' }} />
+    </Pressable>
   );
 };
 
