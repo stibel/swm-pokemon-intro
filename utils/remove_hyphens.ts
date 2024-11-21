@@ -1,3 +1,3 @@
 export const removeHyphens = (word: string) => {
-    return word.replaceAll('-', ' ');
-}
+  return word.replaceAll('-', ' ');
+};
