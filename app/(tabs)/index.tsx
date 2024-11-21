@@ -8,6 +8,7 @@ import {
   removeValueFromAsyncStorage,
 } from '@/utils/async_storage';
 import { PokemonDetails } from '@/components/PokemonDetails';
+import { Link } from 'expo-router';
 
 export default function HomeScreen() {
   const { data } = useQuery('favourite_pokemon', async () => {
@@ -43,7 +44,10 @@ export default function HomeScreen() {
             <PokemonDetails url={data.url ?? ''} />
           </>
         ) : (
-          <ThemedText>No favourite pokemon yet</ThemedText>
+          <>
+            <ThemedText style={{ paddingTop: 24, width: '100%', textAlign: 'center', fontSize: 24, lineHeight: 24 }}>No favourite pokemon yet</ThemedText>
+            <Link href="/(tabs)/list" style={{ textAlign: 'center', fontSize: 16 }}>Find one in the list!</Link>
+          </>
         )}
       </View>
     </ThemedView>
