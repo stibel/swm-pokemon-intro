@@ -1,38 +1,38 @@
-import { Image, StyleSheet } from 'react-native';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
+import { StyleSheet } from 'react-native';
+import { ThemedView } from '@/components/ThemedView';
+import MapView, { Marker } from 'react-native-maps';
+import { useEffect, useRef, useState } from 'react';
 
-export default function ProfileScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }
-    >
-      <ThemedText>map</ThemedText>
-    </ParallaxScrollView>
-  );
+interface IMarker {
+  latitude: number,
+  longitude: number,
+  id: string
 }
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
+export default function ProfileScreen() {
+
+  const [markers, setMarkers] = useState<Array<IMarker>>([]);
+
+  const addMarker = ({ latitude, longitude }: { latitude: number, longitude: number }) => {
+    setMarkers(prevMarkers => [
+      ...prevMarkers,
+      { latitude, longitude, id: `marker-${new Date().getTime()}` } // Assumes no two markers are added at the exact same millisecond
+    ]);
+  }
+
+  useEffect(() => console.log(markers), [markers])
+
+  return (
+    <ThemedView style={{ flex: 1 }}>
+      <MapView style={{
+        width: '100%',
+        height: '100%',
+      }}
+        onLongPress={(e) => addMarker(e.nativeEvent.coordinate)}
+      >
+        {markers.map(({ latitude, longitude, id }) => <Marker key={id} coordinate={{ latitude, longitude }} pinColor='purple' />)}
+      </MapView>
+
+    </ThemedView>
+  );
+}
