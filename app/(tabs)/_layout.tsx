@@ -25,33 +25,46 @@ export default function TabLayout() {
           },
           default: {},
         }),
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Favourite',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="heart.fill" color={color} />
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="heart.fill" color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="list"
         options={{
           title: 'List',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="list.bullet.rectangle.portrait.fill" color={color} />
+          tabBarIcon: ({ color }) => (
+            <IconSymbol
+              size={28}
+              name="list.bullet.rectangle.portrait.fill"
+              color={color}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="camera"
         options={{
           title: 'Camera',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="camera.fill" color={color} />
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="camera.fill" color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="map"
         options={{
           title: 'Map',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="map.fill" color={color} />
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="map.fill" color={color} />
+          ),
         }}
       />
     </Tabs>

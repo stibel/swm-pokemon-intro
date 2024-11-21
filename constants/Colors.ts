@@ -28,6 +28,6 @@ export const Colors = {
     yellow: '#F6E652',
     orange: '#F6BD20',
     blue: '#3B4CCA',
-    ivory: '#FBFBFB'
-  }
+    ivory: '#FBFBFB',
+  },
 };

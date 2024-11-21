@@ -1,4 +1,4 @@
 export interface IPokemonListItem {
-    name: string,
-    url: string
+  name: string;
+  url: string;
 }
