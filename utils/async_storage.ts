@@ -10,7 +10,16 @@ export const storeValueInAsyncStorage = async (key: string, value: string) => {
 
 export const getValueFromAsyncStorage = async (key: string) => {
     try {
-        return await AsyncStorage.getItem(key)
+        const url = await AsyncStorage.getItem(key)
+        return { url: url }
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+export const removeValueFromAsyncStorage = async (key: string) => {
+    try {
+        return await AsyncStorage.removeItem(key);
     } catch (e) {
         console.error(e);
     }

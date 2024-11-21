@@ -1,6 +1,6 @@
 import React, { act, useState } from 'react';
 import { Button, FlatList, Modal, Pressable, View } from 'react-native';
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery, useQueryClient } from 'react-query';
 import { ThemedText } from '@/components/ThemedText';
 import { IPokemonListItem } from '@/types/PokemonListItem';
 import { IPaginatedResponse } from '@/types/PaginatedReponse';
@@ -40,7 +40,7 @@ const PokemonItem = ({ pokemon: { name, url }, onShowDetails }: IPokemonItemProp
     )
 }
 
-export default function ProfileScreen() {
+export default function List() {
 
     const [activePokemonUrl, setActivePokemonUrl] = useState<string | null>(null);
 
@@ -63,6 +63,8 @@ export default function ProfileScreen() {
             return nextOffset ? parseInt(nextOffset, 10) : undefined;
         }
     });
+
+    const queryClient = useQueryClient();
 
     return (
         <ThemedView style={{ flex: 1 }}>
@@ -109,7 +111,10 @@ export default function ProfileScreen() {
                         flexDirection: 'row',
                         alignSelf: 'flex-end'
                     }}>
-                        <Pressable onPress={() => storeValueInAsyncStorage('favourite_pokemon', activePokemonUrl ?? "")}>
+                        <Pressable onPress={() => {
+                            storeValueInAsyncStorage('favourite_pokemon', activePokemonUrl ?? "");
+                            queryClient.invalidateQueries('favourite_pokemon')
+                        }}>
                             <IconSymbol size={50} name="heart.circle.fill" color={Colors.pokemonColors.red} />
                         </Pressable>
                         <Pressable onPress={() => setActivePokemonUrl(null)}>

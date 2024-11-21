@@ -62,7 +62,7 @@ export const PokemonDetails = ({ url }: IPokemonDetailsProps) => {
                     </View>
                     <View>
                         <ThemedText style={{ textAlign: "right", fontWeight: 'bold' }}>Moves:</ThemedText>
-                        <ScrollView style={{ maxHeight: '65%' }}>
+                        <ScrollView style={{ maxHeight: '60%' }}>
                             {data.moves.map(({ move }) => <ThemedText style={{ textAlign: 'right' }} key={move.name}>{removeHyphens(capitalize(move.name))}</ThemedText>)}
                         </ScrollView>
                     </View>
