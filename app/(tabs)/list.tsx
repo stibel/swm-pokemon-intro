@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { act, useState } from 'react';
 import { Button, FlatList, Modal, Pressable, View } from 'react-native';
 import { useInfiniteQuery } from 'react-query';
 import { ThemedText } from '@/components/ThemedText';
-import { IPokemon } from '@/types/Pokemon';
+import { IPokemonListItem } from '@/types/PokemonListItem';
 import { IPaginatedResponse } from '@/types/PaginatedReponse';
 
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { PokemonDetails } from '@/components/PokemonDetails';
+import { storeValueInAsyncStorage } from '@/utils/async_storage';
+import { capitalize } from '@/utils/capitalize';
 
 interface IPokemonItemProps {
-    pokemon: IPokemon,
+    pokemon: IPokemonListItem,
     onShowDetails: (url: string) => void
 }
 
@@ -29,8 +31,7 @@ const PokemonItem = ({ pokemon: { name, url }, onShowDetails }: IPokemonItemProp
             backgroundColor: Colors.pokemonColors.red,
         }}>
             <ThemedText style={{ color: Colors.pokemonColors.ivory, fontWeight: 'bold' }}>
-                {name.replace(name[0],
-                    name[0].toUpperCase())}
+                {capitalize(name)}
             </ThemedText>
             <Pressable onPress={() => onShowDetails(url)}>
                 <IconSymbol size={28} name="eye.fill" color={Colors.pokemonColors.ivory} />
@@ -43,7 +44,7 @@ export default function ProfileScreen() {
 
     const [activePokemonUrl, setActivePokemonUrl] = useState<string | null>(null);
 
-    const fetchPokemon = async (offset: number = 0): Promise<IPaginatedResponse<IPokemon>> => {
+    const fetchPokemon = async (offset: number = 0): Promise<IPaginatedResponse<IPokemonListItem>> => {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`);
         return await response.json();
     };
@@ -56,7 +57,7 @@ export default function ProfileScreen() {
         status,
         error,
         refetch
-    } = useInfiniteQuery<IPaginatedResponse<IPokemon>>('pokemons', ({ pageParam = 0 }) => fetchPokemon(pageParam), {
+    } = useInfiniteQuery<IPaginatedResponse<IPokemonListItem>>('pokemons', ({ pageParam = 0 }) => fetchPokemon(pageParam), {
         getNextPageParam: (lastPage) => {
             const nextOffset = lastPage.next ? new URLSearchParams(lastPage.next.split('?')[1]).get('offset') : undefined;
             return nextOffset ? parseInt(nextOffset, 10) : undefined;
@@ -99,15 +100,22 @@ export default function ProfileScreen() {
             >
                 <View
                     style={{
-                        flex: 1,
                         paddingVertical: 64,
                         paddingHorizontal: 32,
-                        gap: 16,
                     }}
                 >
-                    <Pressable style={{ alignSelf: 'flex-end' }} onPress={() => setActivePokemonUrl(null)}>
-                        <IconSymbol size={50} name="xmark.diamond.fill" color={Colors.pokemonColors.red} />
-                    </Pressable>
+                    <View style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignSelf: 'flex-end'
+                    }}>
+                        <Pressable onPress={() => storeValueInAsyncStorage('favourite_pokemon', activePokemonUrl ?? "")}>
+                            <IconSymbol size={50} name="heart.circle.fill" color={Colors.pokemonColors.red} />
+                        </Pressable>
+                        <Pressable onPress={() => setActivePokemonUrl(null)}>
+                            <IconSymbol size={50} name="xmark.circle.fill" color={Colors.pokemonColors.red} />
+                        </Pressable>
+                    </View>
                     {activePokemonUrl && <PokemonDetails url={activePokemonUrl} />}
                 </View>
             </Modal>
