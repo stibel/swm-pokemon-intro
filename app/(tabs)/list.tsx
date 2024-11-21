@@ -1,35 +1,50 @@
-import React from 'react';
-import { Button, FlatList, View } from 'react-native';
+import React, { act, useState } from 'react';
+import { Button, FlatList, Modal, Pressable, View } from 'react-native';
 import { useInfiniteQuery } from 'react-query';
 import { ThemedText } from '@/components/ThemedText';
-import { IPokemon } from '@/types/Pokemon';
+import { IPokemonListItem } from '@/types/PokemonListItem';
 import { IPaginatedResponse } from '@/types/PaginatedReponse';
 
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
+import { IconSymbol } from '@/components/ui/IconSymbol';
+import { PokemonDetails } from '@/components/PokemonDetails';
+import { storeValueInAsyncStorage } from '@/utils/async_storage';
+import { capitalize } from '@/utils/capitalize';
 
-const PokemonItem = ({ name, url }: IPokemon) => {
+interface IPokemonItemProps {
+    pokemon: IPokemonListItem,
+    onShowDetails: (url: string) => void
+}
+
+const PokemonItem = ({ pokemon: { name, url }, onShowDetails }: IPokemonItemProps) => {
     return (
         <View style={{
+            marginBottom: 8,
+            paddingHorizontal: 8,
+            height: 40,
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-between',
-            backgroundColor: Colors.misc.pokemonRed,
+            alignItems: 'center',
             borderRadius: 5,
-            marginBottom: 8,
-            paddingHorizontal: 8
+            backgroundColor: Colors.pokemonColors.red,
         }}>
-            <ThemedText>
-                {name.replace(name[0],
-                    name[0].toUpperCase())}
+            <ThemedText style={{ color: Colors.pokemonColors.ivory, fontWeight: 'bold' }}>
+                {capitalize(name)}
             </ThemedText>
-            <ThemedText>czeker out</ThemedText>
+            <Pressable onPress={() => onShowDetails(url)}>
+                <IconSymbol size={28} name="eye.fill" color={Colors.pokemonColors.ivory} />
+            </Pressable>
         </View>
     )
 }
 
 export default function ProfileScreen() {
-    const fetchPokemon = async (offset: number = 0): Promise<IPaginatedResponse<IPokemon>> => {
+
+    const [activePokemonUrl, setActivePokemonUrl] = useState<string | null>(null);
+
+    const fetchPokemon = async (offset: number = 0): Promise<IPaginatedResponse<IPokemonListItem>> => {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`);
         return await response.json();
     };
@@ -42,7 +57,7 @@ export default function ProfileScreen() {
         status,
         error,
         refetch
-    } = useInfiniteQuery<IPaginatedResponse<IPokemon>>('pokemons', ({ pageParam = 0 }) => fetchPokemon(pageParam), {
+    } = useInfiniteQuery<IPaginatedResponse<IPokemonListItem>>('pokemons', ({ pageParam = 0 }) => fetchPokemon(pageParam), {
         getNextPageParam: (lastPage) => {
             const nextOffset = lastPage.next ? new URLSearchParams(lastPage.next.split('?')[1]).get('offset') : undefined;
             return nextOffset ? parseInt(nextOffset, 10) : undefined;
@@ -65,17 +80,45 @@ export default function ProfileScreen() {
                     <FlatList
                         scrollEnabled
                         data={data?.pages.flatMap(page => page.results)}
-                        renderItem={({ item }) => <PokemonItem {...item} />}
+                        renderItem={({ item }) => <PokemonItem pokemon={item} onShowDetails={setActivePokemonUrl} />}
                         keyExtractor={({ name }) => name}
                         onEndReached={() => {
                             if (hasNextPage) {
                                 fetchNextPage();
                             }
                         }}
+                        refreshing={Boolean(status) && status === 'loading'}
+                        onRefresh={refetch}
                         ListFooterComponent={isFetchingNextPage ? <ThemedText>Fetching more...</ThemedText> : null}
                     />
                 }
             </View>
+
+            <Modal
+                visible={Boolean(activePokemonUrl)}
+                onRequestClose={() => setActivePokemonUrl(null)}
+            >
+                <View
+                    style={{
+                        paddingVertical: 64,
+                        paddingHorizontal: 32,
+                    }}
+                >
+                    <View style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignSelf: 'flex-end'
+                    }}>
+                        <Pressable onPress={() => storeValueInAsyncStorage('favourite_pokemon', activePokemonUrl ?? "")}>
+                            <IconSymbol size={50} name="heart.circle.fill" color={Colors.pokemonColors.red} />
+                        </Pressable>
+                        <Pressable onPress={() => setActivePokemonUrl(null)}>
+                            <IconSymbol size={50} name="xmark.circle.fill" color={Colors.pokemonColors.red} />
+                        </Pressable>
+                    </View>
+                    {activePokemonUrl && <PokemonDetails url={activePokemonUrl} />}
+                </View>
+            </Modal>
         </ThemedView>
     );
 }
