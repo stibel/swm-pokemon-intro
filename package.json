@@ -43,7 +43,9 @@
     "react-native-vision-camera": "^4.6.1",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.4",
-    "react-query": "^3.39.3"
+    "react-native-worklets-core": "^1.5.0",
+    "react-query": "^3.39.3",
+    "vision-camera-trustee-face-detector-v3": "^1.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
