@@ -1,6 +1,6 @@
 {
   "name": "intro-pokemon",
-  "main": "expo-router/entry",
+  "main": "index.js",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
@@ -44,6 +44,7 @@
     "react-native-vision-camera": "^4.6.1",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.4",
+    "react-native-worklets-core": "^1.5.0",
     "react-query": "^3.39.3"
   },
   "devDependencies": {
