@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { ThemedText } from './ThemedText';
 import { Image, View } from 'react-native';
 import { Colors } from '@/constants/Colors';
@@ -9,6 +9,7 @@ import {
 } from 'react-native-gesture-handler';
 import { removeHyphens } from '@/utils/remove_hyphens';
 import { capitalize } from '@/utils/capitalize';
+import { useEffect } from 'react';
 
 interface IPokemonDetailsProps {
   url: string;
@@ -20,7 +21,9 @@ export const PokemonDetails = ({ url }: IPokemonDetailsProps) => {
     return await data.json();
   };
 
-  const { data } = useQuery<IPokemon>('pokemon_details', fetchPokemonDetails);
+  const { data, refetch } = useQuery<IPokemon>('pokemon_details', fetchPokemonDetails);
+
+  useEffect(() => { refetch() }, [url])
 
   return data ? (
     <GestureHandlerRootView
