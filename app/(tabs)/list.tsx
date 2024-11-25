@@ -126,57 +126,12 @@ export default function List() {
         )}
       </View>
 
-      {/* <Modal
-        visible={Boolean(activePokemonUrl)}
-        onRequestClose={() => setActivePokemonUrl(null)}
-      >
-        <View
-          style={{
-            paddingVertical: 64,
-            paddingHorizontal: 32,
-          }}
-        >
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignSelf: 'flex-end',
-            }}
-          >
-            <Pressable
-              onPress={() => {
-                storeValueInAsyncStorage(
-                  'favourite_pokemon',
-                  activePokemonUrl ?? '',
-                );
-                queryClient.invalidateQueries('favourite_pokemon');
-              }}
-            >
-              <IconSymbol
-                size={50}
-                name="heart.circle.fill"
-                color={Colors.pokemonColors.red}
-              />
-            </Pressable>
-            <Pressable onPress={() => setActivePokemonUrl(null)}>
-              <IconSymbol
-                size={50}
-                name="xmark.circle.fill"
-                color={Colors.pokemonColors.red}
-              />
-            </Pressable>
-          </View>
-          {activePokemonUrl && <PokemonDetails url={activePokemonUrl} />}
-        </View>
-      </Modal> */}
-
       <BottomSheet
         ref={bottomSheetRef}
         snapPoints={['25%', '50%', '90%']}
       >
         <BottomSheetView style={{
           flex: 1,
-          // padding: 36,
           alignItems: 'center',
         }}>
           <View>
@@ -202,7 +157,7 @@ export default function List() {
                   color={Colors.pokemonColors.red}
                 />
               </Pressable>
-              <Pressable onPress={() => setActivePokemonUrl(null)}>
+              <Pressable onPress={() => { setActivePokemonUrl(null); bottomSheetRef.current?.close() }}>
                 <IconSymbol
                   size={50}
                   name="xmark.circle.fill"
