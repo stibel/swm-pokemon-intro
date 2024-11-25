@@ -24,9 +24,7 @@ export default function HomeScreen() {
 
   return (
     <ThemedView style={{ flex: 1 }}>
-      <View
-        style={screenView}
-      >
+      <View style={screenView}>
         {data?.url ? (
           <>
             <Button
@@ -40,8 +38,23 @@ export default function HomeScreen() {
           </>
         ) : (
           <>
-            <ThemedText style={{ paddingTop: 24, width: '100%', textAlign: 'center', fontSize: 24, lineHeight: 24 }}>No favourite pokemon yet</ThemedText>
-            <Link href="/(tabs)/list" style={{ textAlign: 'center', fontSize: 16 }}>Find one in the list!</Link>
+            <ThemedText
+              style={{
+                paddingTop: 24,
+                width: '100%',
+                textAlign: 'center',
+                fontSize: 24,
+                lineHeight: 24,
+              }}
+            >
+              No favourite pokemon yet
+            </ThemedText>
+            <Link
+              href="/(tabs)/list"
+              style={{ textAlign: 'center', fontSize: 16 }}
+            >
+              Find one in the list!
+            </Link>
           </>
         )}
       </View>

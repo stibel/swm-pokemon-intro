@@ -14,7 +14,7 @@ const MAPPING = {
   'camera.fill': 'photo-camera',
   'map.fill': 'map',
   'xmark.circle.fill': 'cancel',
-  'heart.circle.fill': 'favorite'
+  'heart.circle.fill': 'favorite',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

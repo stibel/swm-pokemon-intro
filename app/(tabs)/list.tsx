@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Button, FlatList, Modal, Pressable, View } from 'react-native';
+import { Button, FlatList, Pressable, View } from 'react-native';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
 import { ThemedText } from '@/components/ThemedText';
 import { IPokemonListItem } from '@/types/PokemonListItem';
@@ -42,11 +42,22 @@ const PokemonItem = ({
       }}
     >
       <ThemedText
-        style={{ color: Colors.pokemonColors.ivory, fontWeight: 'bold', textAlign: 'left', fontSize: 24 }}
+        style={{
+          color: Colors.pokemonColors.ivory,
+          fontWeight: 'bold',
+          textAlign: 'left',
+          fontSize: 24,
+        }}
       >
         {capitalize(name)}
       </ThemedText>
-      <FastImage style={{ height: 80, width: 80 }} source={{ uri: getSpritePath(getPokemonIdFromUrl(url)), priority: 'low' }} />
+      <FastImage
+        style={{ height: 80, width: 80 }}
+        source={{
+          uri: getSpritePath(getPokemonIdFromUrl(url)),
+          priority: 'low',
+        }}
+      />
     </Pressable>
   );
 };
@@ -91,12 +102,10 @@ export default function List() {
   const onShowDetails = (url: string) => {
     setActivePokemonUrl(url);
     bottomSheetRef.current?.expand();
-  }
+  };
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <View
-        style={screenView}
-      >
+      <View style={screenView}>
         {error ? (
           <div>
             <ThemedText>Error has occured!</ThemedText>
@@ -126,14 +135,13 @@ export default function List() {
         )}
       </View>
 
-      <BottomSheet
-        ref={bottomSheetRef}
-        snapPoints={['25%', '50%', '90%']}
-      >
-        <BottomSheetView style={{
-          flex: 1,
-          alignItems: 'center',
-        }}>
+      <BottomSheet ref={bottomSheetRef} snapPoints={['25%', '50%', '90%']}>
+        <BottomSheetView
+          style={{
+            flex: 1,
+            alignItems: 'center',
+          }}
+        >
           <View>
             <View
               style={{
@@ -157,7 +165,12 @@ export default function List() {
                   color={Colors.pokemonColors.red}
                 />
               </Pressable>
-              <Pressable onPress={() => { setActivePokemonUrl(null); bottomSheetRef.current?.close() }}>
+              <Pressable
+                onPress={() => {
+                  setActivePokemonUrl(null);
+                  bottomSheetRef.current?.close();
+                }}
+              >
                 <IconSymbol
                   size={50}
                   name="xmark.circle.fill"

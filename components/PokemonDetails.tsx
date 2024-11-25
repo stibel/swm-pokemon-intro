@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { ThemedText } from './ThemedText';
 import { Image, View } from 'react-native';
 import { Colors } from '@/constants/Colors';
@@ -21,9 +21,14 @@ export const PokemonDetails = ({ url }: IPokemonDetailsProps) => {
     return await data.json();
   };
 
-  const { data, refetch } = useQuery<IPokemon>('pokemon_details', fetchPokemonDetails);
+  const { data, refetch } = useQuery<IPokemon>(
+    'pokemon_details',
+    fetchPokemonDetails,
+  );
 
-  useEffect(() => { refetch() }, [url])
+  useEffect(() => {
+    refetch();
+  }, [url, refetch]);
 
   return data ? (
     <GestureHandlerRootView
