@@ -1,4 +1,4 @@
-import { View, Button } from 'react-native';
+import { View, Button, StyleSheet } from 'react-native';
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -39,13 +39,7 @@ export default function HomeScreen() {
         ) : (
           <>
             <ThemedText
-              style={{
-                paddingTop: 24,
-                width: '100%',
-                textAlign: 'center',
-                fontSize: 24,
-                lineHeight: 24,
-              }}
+              style={styles.noFavourite}
             >
               No favourite pokemon yet
             </ThemedText>
@@ -61,3 +55,13 @@ export default function HomeScreen() {
     </ThemedView>
   );
 }
+
+const styles = StyleSheet.create({
+  noFavourite: {
+    paddingTop: 24,
+    width: '100%',
+    textAlign: 'center',
+    fontSize: 24,
+    lineHeight: 24,
+  }
+})

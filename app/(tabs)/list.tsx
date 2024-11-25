@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Button, FlatList, Pressable, View } from 'react-native';
+import { Button, FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
 import { ThemedText } from '@/components/ThemedText';
 import { IPokemonListItem } from '@/types/PokemonListItem';
@@ -29,25 +29,10 @@ const PokemonItem = ({
   return (
     <Pressable
       onPress={() => onShowDetails(url)}
-      style={{
-        marginBottom: 8,
-        paddingHorizontal: 16,
-        height: 80,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        borderRadius: 5,
-        backgroundColor: Colors.pokemonColors.red,
-      }}
+      style={styles.pokemonListItem}
     >
       <ThemedText
-        style={{
-          color: Colors.pokemonColors.ivory,
-          fontWeight: 'bold',
-          textAlign: 'left',
-          fontSize: 24,
-        }}
+        style={styles.pokemonName}
       >
         {capitalize(name)}
       </ThemedText>
@@ -144,11 +129,7 @@ export default function List() {
         >
           <View>
             <View
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignSelf: 'flex-end',
-              }}
+              style={styles.sheetButtonsWrapper}
             >
               <Pressable
                 onPress={() => {
@@ -185,3 +166,28 @@ export default function List() {
     </GestureHandlerRootView>
   );
 }
+
+const styles = StyleSheet.create({
+  pokemonListItem: {
+    marginBottom: 8,
+    paddingHorizontal: 16,
+    height: 80,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: 5,
+    backgroundColor: Colors.pokemonColors.red,
+  },
+  pokemonName: {
+    color: Colors.pokemonColors.ivory,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    fontSize: 24,
+  },
+  sheetButtonsWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+  }
+})
