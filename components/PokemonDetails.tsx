@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { ThemedText } from './ThemedText';
-import { Image, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { IPokemon } from '@/types/Pokemon';
 import {
@@ -32,29 +32,11 @@ export const PokemonDetails = ({ url }: IPokemonDetailsProps) => {
 
   return data ? (
     <GestureHandlerRootView
-      style={{
-        display: 'flex',
-        width: '100%',
-        maxHeight: '100%',
-      }}
+      style={styles.container}
     >
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
+      <View>
         <ThemedText
-          style={{
-            paddingTop: 24,
-            display: 'flex',
-            alignItems: 'center',
-            color: Colors.pokemonColors.red,
-            fontWeight: 'bold',
-            fontSize: 30,
-          }}
+          style={styles.name}
         >
           {data.name.toUpperCase()}
         </ThemedText>
@@ -66,11 +48,7 @@ export const PokemonDetails = ({ url }: IPokemonDetailsProps) => {
         src={data.sprites.other['official-artwork'].front_default}
       />
       <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}
+        style={styles.details}
       >
         <View style={{ display: 'flex' }}>
           <View>
@@ -108,3 +86,24 @@ export const PokemonDetails = ({ url }: IPokemonDetailsProps) => {
     </GestureHandlerRootView>
   ) : null;
 };
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    width: '100%',
+    maxHeight: '100%',
+  },
+  name: {
+    paddingTop: 24,
+    display: 'flex',
+    alignItems: 'center',
+    color: Colors.pokemonColors.red,
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  }
+})
