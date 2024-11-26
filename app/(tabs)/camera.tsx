@@ -7,9 +7,10 @@ import {
 
 import { Camera } from 'react-native-vision-camera';
 import { ThemedText } from '@/components/ThemedText';
+import { detectObjects } from '@/utils/plugin_setup';
 
 export default function CameraScreen() {
-  const device = useCameraDevice('front')
+  const device = useCameraDevice('back')
   const { hasPermission, requestPermission } = useCameraPermission()
 
   if (!hasPermission) {
@@ -18,7 +19,8 @@ export default function CameraScreen() {
 
   const frameProcessor = useFrameProcessor((frame) => {
     'worklet'
-    console.log(frame)
+    const objects = detectObjects(frame);
+    console.log(`Objects in frame ${objects}`)
   }, [])
 
   if (!hasPermission) return <ThemedText> no permission </ThemedText>

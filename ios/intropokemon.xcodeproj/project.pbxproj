@@ -13,10 +13,10 @@
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		74153E225E5740F5A0EC7812 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFC478EEC344209A0534CAF /* noop-file.swift */; };
 		96905EF65AED1B983A6B3ABC /* libPods-intropokemon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-intropokemon.a */; };
+		9704A59244A4477BAE91AAE4 /* MyObjectDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = 673EC2BDF1754214A8E5687E /* MyObjectDetection.m */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		CB86BAE2C02451710C14DDC3 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 0321E0906A31257742177C96 /* PrivacyInfo.xcprivacy */; };
-		9704A59244A4477BAE91AAE4 /* MyObjectDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = 673EC2BDF1754214A8E5687E /* MyObjectDetection.m */; };
 		D0E8459852CE4F21B0BF4A07 /* MyObjectDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2378AAE06EBB4A6BB5E30DB2 /* MyObjectDetection.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,8 +28,10 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = intropokemon/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = intropokemon/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = intropokemon/main.m; sourceTree = "<group>"; };
+		2378AAE06EBB4A6BB5E30DB2 /* MyObjectDetection.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MyObjectDetection.swift; path = MyObjectDetection.swift; sourceTree = "<group>"; };
 		26A859B0128B496D869AB6F3 /* intropokemon-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "intropokemon-Bridging-Header.h"; path = "intropokemon/intropokemon-Bridging-Header.h"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-intropokemon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-intropokemon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		673EC2BDF1754214A8E5687E /* MyObjectDetection.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = MyObjectDetection.m; path = MyObjectDetection.m; sourceTree = "<group>"; };
 		6C2E3173556A471DD304B334 /* Pods-intropokemon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-intropokemon.debug.xcconfig"; path = "Target Support Files/Pods-intropokemon/Pods-intropokemon.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-intropokemon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-intropokemon.release.xcconfig"; path = "Target Support Files/Pods-intropokemon/Pods-intropokemon.release.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = intropokemon/SplashScreen.storyboard; sourceTree = "<group>"; };
@@ -37,8 +39,6 @@
 		ECFC478EEC344209A0534CAF /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "intropokemon/noop-file.swift"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-intropokemon/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		673EC2BDF1754214A8E5687E /* MyObjectDetection.m */ = {isa = PBXFileReference; name = "MyObjectDetection.m"; path = "MyObjectDetection.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		2378AAE06EBB4A6BB5E30DB2 /* MyObjectDetection.swift */ = {isa = PBXFileReference; name = "MyObjectDetection.swift"; path = "MyObjectDetection.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +127,16 @@
 			path = intropokemon/Supporting;
 			sourceTree = "<group>";
 		};
+		BC1A2DBED1A34A23B94FA703 /* MyObjectDetection */ = {
+			isa = PBXGroup;
+			children = (
+				673EC2BDF1754214A8E5687E /* MyObjectDetection.m */,
+				2378AAE06EBB4A6BB5E30DB2 /* MyObjectDetection.swift */,
+			);
+			name = MyObjectDetection;
+			path = MyObjectDetection;
+			sourceTree = "<group>";
+		};
 		D65327D7A22EEC0BE12398D9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,16 +152,6 @@
 				92DBD88DE9BF7D494EA9DA96 /* intropokemon */,
 			);
 			name = ExpoModulesProviders;
-			sourceTree = "<group>";
-		};
-		BC1A2DBED1A34A23B94FA703 /* MyObjectDetection */ = {
-			isa = PBXGroup;
-			children = (
-				673EC2BDF1754214A8E5687E /* MyObjectDetection.m */,
-				2378AAE06EBB4A6BB5E30DB2 /* MyObjectDetection.swift */,
-			);
-			name = MyObjectDetection;
-			path = MyObjectDetection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +269,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-intropokemon/Pods-intropokemon-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport/GoogleDataTransport_Privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities/GoogleUtilities_Privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MLKitObjectDetection/MLKitObjectDetectionResources.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MLKitObjectDetectionCommon/MLKitObjectDetectionCommonResources.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC/FBLPromises_Privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf/Protobuf_Privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/nanopb/nanopb_Privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/EXConstants.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/ExpoConstants_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/ExpoFileSystem/ExpoFileSystem_privacy.bundle",
@@ -284,6 +291,13 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleDataTransport_Privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleUtilities_Privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MLKitObjectDetectionResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MLKitObjectDetectionCommonResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FBLPromises_Privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Protobuf_Privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/nanopb_Privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXConstants.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoConstants_privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoFileSystem_privacy.bundle",
@@ -481,7 +495,10 @@
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -536,7 +553,10 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

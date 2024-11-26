@@ -3,6 +3,7 @@ module.exports = {
     plugins: [
         [
             'react-native-worklets-core/plugin',
+            { globals: ['__detectObjects'] }
         ],
         [
             'react-native-reanimated/plugin',
