@@ -3,6 +3,9 @@ module.exports = {
     plugins: [
         [
             'react-native-worklets-core/plugin',
+            {
+                globals: ['__detectFaces']
+            }
         ],
         [
             'react-native-reanimated/plugin',

@@ -7,6 +7,7 @@ import {
 
 import { Camera } from 'react-native-vision-camera';
 import { ThemedText } from '@/components/ThemedText';
+import { detectFaces } from '@/utils/plugin_wrapper';
 
 export default function CameraScreen() {
   const device = useCameraDevice('front')
@@ -18,7 +19,8 @@ export default function CameraScreen() {
 
   const frameProcessor = useFrameProcessor((frame) => {
     'worklet'
-    console.log(frame)
+    const faces = detectFaces(frame)
+    console.log(`Faces in Frame: ${faces}`)
   }, [])
 
   if (!hasPermission) return <ThemedText> no permission </ThemedText>
