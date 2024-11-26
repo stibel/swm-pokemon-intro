@@ -276,6 +276,9 @@ PODS:
   - GoogleMLKit/ObjectDetection (3.2.0):
     - GoogleMLKit/MLKitCore
     - MLKitObjectDetection (~> 2.2.0)
+  - GoogleMLKit/ObjectDetectionCustom (3.2.0):
+    - GoogleMLKit/MLKitCore
+    - MLKitObjectDetectionCustom (~> 2.2.0)
   - GoogleToolboxForMac/DebugUtils (2.3.2):
     - GoogleToolboxForMac/Defines (= 2.3.2)
   - GoogleToolboxForMac/Defines (2.3.2)
@@ -337,6 +340,11 @@ PODS:
   - MLKitObjectDetectionCommon (4.2.0):
     - MLKitCommon (~> 8.0)
     - MLKitVision (~> 4.2)
+  - MLKitObjectDetectionCustom (2.2.0):
+    - MLKitCommon (~> 8.0)
+    - MLKitObjectDetectionCommon (~> 4.2)
+    - MLKitVision (~> 4.2)
+    - MLKitVisionKit (~> 5.2)
   - MLKitVision (4.2.0):
     - GoogleToolboxForMac/Logger (~> 2.1)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
@@ -2194,6 +2202,7 @@ DEPENDENCIES:
   - fmt (from `../node_modules/react-native/third-party-podspecs/fmt.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - GoogleMLKit/ObjectDetection (= 3.2.0)
+  - GoogleMLKit/ObjectDetectionCustom
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCT-Folly/Fabric (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
@@ -2278,6 +2287,7 @@ SPEC REPOS:
     - MLKitImageLabelingCommon
     - MLKitObjectDetection
     - MLKitObjectDetectionCommon
+    - MLKitObjectDetectionCustom
     - MLKitVision
     - MLKitVisionKit
     - nanopb
@@ -2519,6 +2529,7 @@ SPEC CHECKSUMS:
   MLKitImageLabelingCommon: 48a3d85b80a993edb168576f94192338e046a836
   MLKitObjectDetection: 76da46294ddf1aba22d2b6d69fa83ed1ce5dad49
   MLKitObjectDetectionCommon: 9fd75e357db52714013d9dda97a9f35e7b5d7d5b
+  MLKitObjectDetectionCustom: 1c5f27e4b5afd9e4348da4c890b8c69e508dd52d
   MLKitVision: 96c96571190b7f63eddf4a12068ce8a8689e0d2c
   MLKitVisionKit: bd7f84af2da356322872182b1f5bdf66f68e4584
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
@@ -2594,6 +2605,6 @@ SPEC CHECKSUMS:
   VisionCamera: ec141897a88c2e95e8b83cf97b8e4db801e02fd6
   Yoga: 96872ee462cfc43866ad013c8160d4ff6b85709b
 
-PODFILE CHECKSUM: 93d5100998411c8dbd4e75e947c3d94447a36373
+PODFILE CHECKSUM: d75bcce15c333048d764262ac3728c38d554a8d2
 
 COCOAPODS: 1.16.2

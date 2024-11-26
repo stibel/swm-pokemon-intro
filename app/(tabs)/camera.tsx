@@ -17,9 +17,9 @@ export default function CameraScreen() {
     requestPermission();
   }
 
-  const frameProcessor = useFrameProcessor((frame) => {
+  const frameProcessor = useFrameProcessor(async (frame) => {
     'worklet'
-    const objects = detectObjects(frame);
+    const objects = await detectObjects(frame);
     console.log(`Objects in frame ${objects}`)
   }, [])
 
