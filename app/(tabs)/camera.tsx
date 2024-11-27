@@ -20,7 +20,7 @@ export default function CameraScreen() {
   const frameProcessor = useFrameProcessor(async (frame) => {
     'worklet'
     const objects = await detectObjects(frame);
-    console.log(objects)
+    console.log(objects.map(({ labels }) => labels))
   }, [])
 
   if (!hasPermission) return <ThemedText> no permission </ThemedText>
