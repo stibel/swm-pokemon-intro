@@ -7,9 +7,10 @@ import {
 
 import { Camera } from 'react-native-vision-camera';
 import { detectObjects } from '@/utils/plugin_setup';
-import { SkFont, Skia, useFont } from '@shopify/react-native-skia';
+import { Skia, useFont } from '@shopify/react-native-skia';
 import { NoCameraPermission } from '@/components/camera/NoCameraPermission';
 import { NoCameraDevice } from '@/components/camera/NoCameraDevice';
+import { getPaint } from '@/utils/frame_processor/get_paint';
 
 export default function CameraScreen() {
   const device = useCameraDevice('back')
@@ -23,37 +24,35 @@ export default function CameraScreen() {
 
 
   const frameProcessor = useSkiaFrameProcessor((frame) => {
-
     'worklet'
+
     if (!font) {
       return
     }
-    const result = detectObjects(frame);
-    frame.render()
 
+    const result = detectObjects(frame);
+
+    frame.render()
     result.forEach((res) => {
       const rect = Skia.XYWHRect(res.frame.x, res.frame.y, res.frame.width, res.frame.height)
-      const paint = Skia.Paint()
-      paint.setStyle(1);
-      paint.setStrokeWidth(10);
-      paint.setColor(Skia.Color('red'))
-      frame.drawRect(rect, paint)
+      frame.drawRect(rect, getPaint({ style: 1, strokeWidth: 10, color: Skia.Color('red') }))
 
-      const bgPaint = Skia.Paint();
-      bgPaint.setColor(Skia.Color('black'));
+      const label = res.labels[0];
       const metrics = font!.getMetrics();
-      const textWidth = font!.measureText(res.labels[0].text).width;
-      frame.drawRect(Skia.XYWHRect(res.frame.x, res.frame.y - metrics?.bounds?.height, textWidth, metrics?.bounds?.height), bgPaint);
+      const textWidth = font!.measureText(label.text).width;
 
-      const textPaint = Skia.Paint();
-      textPaint.setColor(Skia.Color('white'));
-      frame.drawText(`${res.labels[0].text} ${(res.labels[0].confidence * 100).toFixed(2)}%`, res.frame.x, res.frame.y, textPaint, font as SkFont);
+      if (metrics.bounds) {
+        frame.drawRect(Skia.XYWHRect(res.frame.x, res.frame.y - metrics?.bounds?.height, textWidth, metrics?.bounds?.height), getPaint({ color: Skia.Color('black') }));
+      }
+
+      frame.drawText(`${label.text} ${(label.confidence * 100).toFixed(2)}%`, res.frame.x, res.frame.y, getPaint({ color: Skia.Color('white') }), font);
     })
   }, [])
 
   if (!font) {
     return null;
   }
+
   if (!hasPermission) return <NoCameraPermission />
   if (!device) return <NoCameraDevice />
 
