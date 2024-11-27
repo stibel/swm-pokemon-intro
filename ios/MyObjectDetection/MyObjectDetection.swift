@@ -25,16 +25,10 @@ public class MyObjectDetectionPlugin: FrameProcessorPlugin {
     options.classificationConfidenceThreshold = NSNumber(value: 0.5)
     options.maxPerObjectLabelCount = 3
     
-    // let options = ObjectDetectorOptions()
-    // options.shouldEnableClassification = true
-
     let objectDetector = ObjectDetector.objectDetector(options: options)
 
     let image = VisionImage(buffer: frame.buffer);
     image.orientation = .up;
-    
-    var result: [Any] = [];
-
 
 //     objectDetector.process(image) { objects, error in
 //       guard error == nil else {
@@ -70,20 +64,37 @@ public class MyObjectDetectionPlugin: FrameProcessorPlugin {
 //     }
 
     var objects: [Object];
-    var res: [[String]];
+    var mapped: [Any] = [];
     
     do {
-      objects = try objectDetector.results(in: image);
-      res = objects.map{ $0.labels.enumerated().map { (label) in label.element.text } }
-    } catch let _error {
-    // Handle the error.
-      return nil;
-    }
-//
-//    let res = objects.map{ $0.frame }
-    let flattenedArray = res.reduce([], { $0 + $1 })
-    let resultString = flattenedArray.compactMap({ $0 }).joined(separator: " ")
-    print("RETURN", resultString)
-    return resultString
+         let objects = try objectDetector.results(in: image)
+         mapped = objects.map { object -> [String: Any] in
+             let frameDict = [
+                 "x": object.frame.origin.x,
+                 "y": object.frame.origin.y,
+                 "width": object.frame.size.width,
+                 "height": object.frame.size.height
+             ]
+             
+             let labels = object.labels.map { label -> [String: Any] in
+                 [
+                     "text": label.text,
+                     "index": label.index,
+                     "confidence": label.confidence
+                 ]
+             }
+             
+             return [
+                 "frame": frameDict,
+                 "labels": labels
+             ]
+         }
+       } catch {
+           print("Failed to process image with error: \(error)")
+           return nil
+       }
+
+       print("RETURN", mapped)
+       return mapped
   }
 }
