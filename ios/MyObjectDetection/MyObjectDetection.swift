@@ -30,40 +30,6 @@ public class MyObjectDetectionPlugin: FrameProcessorPlugin {
     let image = VisionImage(buffer: frame.buffer);
     image.orientation = .up;
 
-//     objectDetector.process(image) { objects, error in
-//       guard error == nil else {
-//         // Error.
-//         return
-//       }
-//       guard let objects = objects, !objects.isEmpty else {
-//         // No objects detected.
-//         print("No objects detected or objects array is nil.")
-//         return
-//       }
-//
-//       // objects contains one item if multiple object detection wasn't enabled.
-//       for object in objects {
-//
-//         let frame = object.frame
-//         let trackingID = object.trackingID
-//
-//         // If classification was enabled:
-//         // print(object)
-//         let description = object.labels.enumerated().map { (index, label) in
-//           "Label \(index): \(label.text), \(label.confidence)"
-//           }.joined(separator:"\n")
-//          result.append(description);
-//
-//          print(description);
-//
-//          
-//       }
-//       
-//       // Success. Get object info here.
-//       // ...
-//     }
-
-    var objects: [Object];
     var mapped: [Any] = [];
     
     do {
@@ -94,7 +60,6 @@ public class MyObjectDetectionPlugin: FrameProcessorPlugin {
            return nil
        }
 
-       print("RETURN", mapped)
        return mapped
   }
 }

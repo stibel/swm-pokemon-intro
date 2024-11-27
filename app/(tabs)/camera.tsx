@@ -6,10 +6,10 @@ import {
 } from 'react-native-vision-camera';
 
 import { Camera } from 'react-native-vision-camera';
-import { ThemedText } from '@/components/ThemedText';
 import { detectObjects } from '@/utils/plugin_setup';
 import { SkFont, Skia, useFont } from '@shopify/react-native-skia';
 import { NoCameraPermission } from '@/components/camera/NoCameraPermission';
+import { NoCameraDevice } from '@/components/camera/NoCameraDevice';
 
 export default function CameraScreen() {
   const device = useCameraDevice('back')
@@ -52,11 +52,10 @@ export default function CameraScreen() {
   }, [])
 
   if (!font) {
-    console.log("Font is not loaded yet");
     return null;
   }
   if (!hasPermission) return <NoCameraPermission />
-  if (device == null) return <ThemedText> no device </ThemedText>
+  if (!device) return <NoCameraDevice />
 
   return (
     <Camera
