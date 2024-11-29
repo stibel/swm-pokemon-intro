@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
 import { ThemedText } from '@/components/ThemedText';
@@ -22,7 +22,7 @@ interface IPokemonItemProps {
   onShowDetails: (url: string) => void;
 }
 
-const PokemonItem = ({
+export const PokemonItem = ({
   pokemon: { name, url },
   onShowDetails,
 }: IPokemonItemProps) => {
@@ -88,6 +88,7 @@ export default function List() {
     setActivePokemonUrl(url);
     bottomSheetRef.current?.expand();
   };
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={screenView}>

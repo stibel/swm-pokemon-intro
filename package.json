@@ -44,7 +44,7 @@
     "react-native-screens": "~4.1.0",
     "react-native-vision-camera": "^4.6.1",
     "react-native-web": "~0.19.13",
-    "react-native-webview": "13.12.4",
+    "react-native-webview": "13.12.2",
     "react-native-worklets-core": "^1.5.0",
     "react-query": "^3.39.3"
   },
