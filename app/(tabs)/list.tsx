@@ -16,6 +16,7 @@ import FastImage from 'react-native-fast-image';
 import { screenView } from '@/components/styles/screen_view';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import { usePokemons } from '@/queries/usePokemons';
 
 interface IPokemonItemProps {
   pokemon: IPokemonListItem;
@@ -54,15 +55,6 @@ export default function List() {
 
   const queryClient = useQueryClient();
 
-  const fetchPokemon = async (
-    offset: number = 0,
-  ): Promise<IPaginatedResponse<IPokemonListItem>> => {
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`,
-    );
-    return await response.json();
-  };
-
   const {
     data,
     fetchNextPage,
@@ -71,18 +63,7 @@ export default function List() {
     status,
     error,
     refetch,
-  } = useInfiniteQuery<IPaginatedResponse<IPokemonListItem>>(
-    'pokemons',
-    ({ pageParam = 0 }) => fetchPokemon(pageParam),
-    {
-      getNextPageParam: (lastPage) => {
-        const nextOffset = lastPage.next
-          ? new URLSearchParams(lastPage.next.split('?')[1]).get('offset')
-          : undefined;
-        return nextOffset ? parseInt(nextOffset, 10) : undefined;
-      },
-    },
-  );
+  } = usePokemons();
 
   const onShowDetails = (url: string) => {
     setActivePokemonUrl(url);
