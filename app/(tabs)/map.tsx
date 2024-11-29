@@ -12,7 +12,7 @@ import { usePokemons } from '@/queries/usePokemons';
 export default function MapScreen() {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
-  const [pokemon, setPokemon] = useState<string | null>()
+  const [pokemon, setPokemon] = useState<string | null>();
 
   const {
     data,
@@ -59,7 +59,7 @@ export default function MapScreen() {
 
   useEffect(() => {
     bottomSheetRef.current?.expand();
-  }, [])
+  }, []);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -67,9 +67,7 @@ export default function MapScreen() {
         <WebView originWhitelist={['*']} source={{ html: mapHTML }} />
       </View>
 
-      <BottomSheet ref={bottomSheetRef}
-        snapPoints={['25%', '50%', '90%']}
-      >
+      <BottomSheet ref={bottomSheetRef} snapPoints={['25%', '50%', '90%']}>
         <BottomSheetView
           style={{
             flex: 1,
@@ -80,7 +78,12 @@ export default function MapScreen() {
             scrollEnabled
             data={data?.pages.flatMap((page) => page.results)}
             renderItem={({ item }) => (
-              <PokemonItem pokemon={item} onShowDetails={(url) => setPokemon(getSpritePath(getPokemonIdFromUrl(url)))} />
+              <PokemonItem
+                pokemon={item}
+                onShowDetails={(url) =>
+                  setPokemon(getSpritePath(getPokemonIdFromUrl(url)))
+                }
+              />
             )}
             keyExtractor={({ name }) => name}
             onEndReached={() => {
@@ -96,6 +99,8 @@ export default function MapScreen() {
               ) : null
             }
           />
-        </BottomSheetView></BottomSheet>
-    </GestureHandlerRootView>)
-};
+        </BottomSheetView>
+      </BottomSheet>
+    </GestureHandlerRootView>
+  );
+}

@@ -38,9 +38,7 @@ export default function HomeScreen() {
           </>
         ) : (
           <>
-            <ThemedText
-              style={styles.noFavourite}
-            >
+            <ThemedText style={styles.noFavourite}>
               No favourite pokemon yet
             </ThemedText>
             <Link
@@ -63,5 +61,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
     lineHeight: 24,
-  }
-})
+  },
+});

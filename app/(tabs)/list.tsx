@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button, FlatList, Pressable, StyleSheet, View } from 'react-native';
-import { useInfiniteQuery, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { ThemedText } from '@/components/ThemedText';
 import { IPokemonListItem } from '@/types/PokemonListItem';
-import { IPaginatedResponse } from '@/types/PaginatedReponse';
 
 import { Colors } from '@/constants/Colors';
 import { IconSymbol } from '@/components/ui/IconSymbol';
@@ -32,11 +31,7 @@ export const PokemonItem = ({
       onPress={() => onShowDetails(url)}
       style={styles.pokemonListItem}
     >
-      <ThemedText
-        style={styles.pokemonName}
-      >
-        {capitalize(name)}
-      </ThemedText>
+      <ThemedText style={styles.pokemonName}>{capitalize(name)}</ThemedText>
       <FastImage
         style={{ height: 80, width: 80 }}
         source={{
@@ -110,9 +105,7 @@ export default function List() {
           }}
         >
           <View>
-            <View
-              style={styles.sheetButtonsWrapper}
-            >
+            <View style={styles.sheetButtonsWrapper}>
               <Pressable
                 onPress={() => {
                   storeValueInAsyncStorage(
@@ -171,5 +164,5 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignSelf: 'flex-end',
-  }
-})
+  },
+});

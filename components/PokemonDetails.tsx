@@ -31,15 +31,9 @@ export const PokemonDetails = ({ url }: IPokemonDetailsProps) => {
   }, [url, refetch]);
 
   return data ? (
-    <GestureHandlerRootView
-      style={styles.container}
-    >
+    <GestureHandlerRootView style={styles.container}>
       <View>
-        <ThemedText
-          style={styles.name}
-        >
-          {data.name.toUpperCase()}
-        </ThemedText>
+        <ThemedText style={styles.name}>{data.name.toUpperCase()}</ThemedText>
       </View>
       <Image
         style={{ height: 300, width: 300 }}
@@ -47,9 +41,7 @@ export const PokemonDetails = ({ url }: IPokemonDetailsProps) => {
         width={475}
         src={data.sprites.other['official-artwork'].front_default}
       />
-      <View
-        style={styles.details}
-      >
+      <View style={styles.details}>
         <View style={{ display: 'flex' }}>
           <View>
             <ThemedText style={{ fontWeight: 'bold' }}>Abilities:</ThemedText>
@@ -105,5 +97,5 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-  }
-})
+  },
+});
