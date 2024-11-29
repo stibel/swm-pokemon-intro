@@ -1,5 +1,4 @@
 import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 import { IPaginatedResponse } from '@/types/PaginatedReponse';
 import { IPokemonListItem } from '@/types/PokemonListItem';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
@@ -32,7 +31,6 @@ export default function MapScreen() {
     hasNextPage,
     isFetchingNextPage,
     status,
-    error,
     refetch,
   } = useInfiniteQuery<IPaginatedResponse<IPokemonListItem>>(
     'pokemons',
